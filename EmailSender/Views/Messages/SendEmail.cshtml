@@ -1,0 +1,59 @@
+﻿@model MailToBeSent
+@{
+
+}
+<div class="text-center">
+
+    <h1 class="display-4">Send The Message</h1>
+
+    <div class="alert alert-warning mt-5" role="alert">
+        <b>Note</b> : Please check your spam after sending the message , becasue the mail <u>may</u> be in your spam istead of the inbox.
+    </div>
+
+    <form asp-action="SendEmail" method="post" class="mt-5" id="sendEmailForm">
+        <fieldset class="form-group border p-3">
+            <legend class="w-auto px-2">Send a Message</legend>
+            <div class="mb-3 mt-5">
+                <label asp-for="Subject" class="form-label w-100 text-start">Subject</label>
+                <input asp-for="Subject" type="text" class="form-control w-50" id="Subject" disabled>
+            </div>
+            <div class="mb-3">
+                <label asp-for="MessageBody" class="form-label w-100 text-start">Message Body</label>
+                <textarea asp-for="MessageBody" class="form-control" rows="6" id="MessageBody" disabled></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ToEmailAddresses" class="form-label w-100 text-start">Email Addresses</label>
+                <input asp-for="ToEmailAddresses" type="text" class="form-control" placeholder="Enter Email Ids separated by comma e.g.(test@gmail.com,test02@gmail.com)">
+                <span asp-validation-for="ToEmailAddresses" class="text-danger"></span>
+            </div>
+
+            <button  id="send" type="submit" class="btn btn-primary mt-5"> Send The Message </button>
+        </fieldset>
+    </form>
+</div>
+
+
+@section Scripts {
+   @{<partial name="_ValidationScriptsPartial" />}
+
+    <script type="text/javascript" >
+      
+      $(document).ready(function () {
+
+
+            $("#send").click(function (event) {
+                console.log("My Foooooorm");
+                if ($('form').valid()) {
+                    $('#MessageBody').prop('disabled', false);
+                    $('#Subject').prop('disabled', false);
+                }
+
+
+            });
+        
+        
+      });
+   </script>
+
+}
